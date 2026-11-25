@@ -1,0 +1,122 @@
+/* ==========================================================================
+   Mini site de link da bio: a página inteira é o flyer.
+   As áreas clicáveis (.hit) ficam por cima da imagem, em porcentagem.
+   Medidas calculadas sobre a imagem original de 941 x 1671 px.
+   ========================================================================== */
+
+:root {
+  --bg: #e18aa4;          /* rosa do flyer, usado nas laterais e no fundo */
+  --focus: #7a1140;       /* vinho do contorno de foco */
+  --focus-halo: #ffffff;
+  --page-max: 560px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--bg);
+  overflow-x: hidden;
+  /* respeita o notch e a barra inferior do iPhone */
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* ---------- A página (o flyer) ---------- */
+
+.page {
+  position: relative;
+  width: 100%;
+  max-width: var(--page-max);
+  margin: 0 auto;
+  line-height: 0;
+}
+
+.page .flyer {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ---------- Áreas clicáveis invisíveis ---------- */
+
+.hit {
+  position: absolute;
+  display: block;
+  -webkit-tap-highlight-color: transparent;
+  background: transparent;
+  cursor: pointer;
+}
+
+.hit:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--focus-halo);   /* halo branco: visível sobre qualquer rosa */
+}
+
+.hit--pill  { border-radius: 999px; }
+.hit--round { border-radius: 50%; }
+.hit--card  { border-radius: 4.5% / 14%; }
+
+/* left / top / width / height em % da imagem (941 x 1671) */
+.hit--logo     { left: 5.526%;  top: 6.703%;  width: 32.731%; height: 17.953%; }
+.hit--doces    { left: 6.589%;  top: 44.943%; width: 20.298%; height: 7.002%;  }
+.hit--enc      { left: 28.799%; top: 44.943%; width: 20.191%; height: 7.002%;  }
+.hit--aval     { left: 51.01%;  top: 44.943%; width: 20.191%; height: 7.002%;  }
+.hit--loc      { left: 73.007%; top: 44.943%; width: 20.404%; height: 7.002%;  }
+.hit--wa       { left: 19.022%; top: 77.738%; width: 61.955%; height: 6.164%;  }
+.hit--delivery { left: 19.341%; top: 84.62%;  width: 61.424%; height: 3.77%;   }
+.hit--ig       { left: 35.069%; top: 89.048%; width: 30.818%; height: 2.633%;  }
+
+/* ---------- Telas mais altas que o flyer ----------
+   Estende o topo e o rodapé do próprio flyer (espelhado, desfocado,
+   escurecido e com máscara em degradê) em vez de mostrar barras chapadas. */
+
+@media (max-aspect-ratio: 9/16) {
+  body { overflow: hidden; }
+
+  .page::before,
+  .page::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    pointer-events: none;
+    background-image: url("../assets/img/flyer.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    filter: blur(14px) brightness(0.88);
+    transform: scale(1.06, -1);   /* espelha: a borda do flyer encosta na extensão */
+  }
+
+  /* acima do flyer: espelha as linhas do topo */
+  .page::before {
+    bottom: 100%;
+    background-position: center top;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0) 100%);
+  }
+
+  /* abaixo do flyer: espelha as linhas do rodapé */
+  .page::after {
+    top: 100%;
+    background-position: center bottom;
+    -webkit-mask-image: linear-gradient(to top, #000 0%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to top, #000 0%, rgba(0,0,0,0) 100%);
+  }
+}
