@@ -26,7 +26,7 @@ paraiso-sweets/
 | "@paraiso_sweets" | Instagram |
 
 - **WhatsApp:** `https://wa.me/5581981811992` com a mensagem pronta
-  "Olá! Vim pelo seu Instagram e gostaria de agendar um horário."
+  "Olá! Vim pelo seu Instagram e gostaria de fazer um pedido."
 - **Instagram:** `https://www.instagram.com/paraiso_sweets/`
 - **Avaliações:** o flyer não mostra esse link. No `index.html`, procure por
   `SEU-LINK-AVALIACOES-AQUI` e cole o link das avaliações (por exemplo, a página
@@ -38,9 +38,8 @@ paraiso-sweets/
 Para trocar o número de WhatsApp, use "Localizar e substituir" no `index.html` em
 `5581981811992` (3 ocorrências). O formato é 55 + DDD + número, só dígitos.
 
-Para mudar a mensagem pronta, substitua o texto depois de `?text=` por outro texto
-codificado em URL (use qualquer "URL encoder" online). Por exemplo, para encomendas:
-`Ol%C3%A1%21%20Vim%20pelo%20seu%20Instagram%20e%20gostaria%20de%20fazer%20uma%20encomenda.`
+Para mudar a mensagem pronta, substitua o texto depois de `?text=` (2 ocorrências no
+`index.html`) por outro texto codificado em URL. Use qualquer "URL encoder" online.
 
 ## 2. Ver no computador
 
